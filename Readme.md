@@ -3,7 +3,7 @@ Abaixo colocarei imagens de cada tarefa e subtarefa funcionando para mais rápid
 
 :small_blue_diamond: Cadastro de novos usuários e senha. Deve permitir associar um usuário a uma conta.
 
-![Descrição da imagem](imagens/youshopadminuser.PNG)
+![Descrição da imagem](imagens/youshopadminuser.png)
 
 :small_blue_diamond: Listagem e criação de contas (modelo Account).Permitindo desativar e ativar as contas:
 
