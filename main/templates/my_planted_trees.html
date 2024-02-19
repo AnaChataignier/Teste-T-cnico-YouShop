@@ -81,13 +81,10 @@
 <div class="container">
     <h2>My Planted Trees</h2>
     <ul>
-        {% for planted_tree in planted_trees %}
-        <ul>
             {% for planted_tree in planted_trees %}
                 <li><a href="{% url 'planted_tree_detail' planted_tree.id %}">{{ planted_tree.tree.name }} - {{ planted_tree.tree.scientific_name }}</li>
             {% endfor %}
         </ul>
-        {% endfor %}
     </ul>
 </div>
 

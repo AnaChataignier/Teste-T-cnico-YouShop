@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .models import Profile, PlantedTree, Account
 from .forms import ProfileForm, PlantedTreeForm
+from django.contrib import messages
 
 
 def user_login(request):
@@ -13,18 +14,14 @@ def user_login(request):
         print(username)
         print(password)
         if user is not None:
-            try:
-                login(request, user)
-                # Autenticação bem-sucedida, redirecionar para página desejada
-                return redirect("home")
-            except Exception as e:
-                print("erro ao logar:", e)
+            login(request, user)
+            messages.success(request, f"{username} logado com sucesso!")
+            return redirect("home")
         else:
-            # Autenticação falhou, exibir mensagem de erro
+            messages.error(request, "Invalid username or password")
             return render(
                 request,
                 "user_login.html",
-                print({"error_message": "Invalid username or password"}),
             )
     else:
         return render(request, "user_login.html")
@@ -37,18 +34,20 @@ def home(request):
 def my_profile(request):
     user = request.user
     try:
-        profile = user.profile  # Tenta obter o Profile associado ao usuário logado
+        profile = user.profile
     except Profile.DoesNotExist:
         profile = None
     if request.method == "POST":
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             profile = form.save(commit=False)
-            profile.user = request.user  # Define o usuário atualmente logado
+            profile.user = request.user
             profile.save()
-            return redirect(
-                "home"
-            )  # Redireciona para a página inicial após salvar o perfil
+            messages.success(request, f"information saved successfully")
+            return redirect("home")
+        else:
+            messages.error(request, "Something went wrong, please try again")
+            return redirect("my_profile")
     else:
         form = ProfileForm(instance=profile)
     return render(request, "my_profile.html", {"form": form})
@@ -73,6 +72,9 @@ def add_planted_tree(request):
             ].id  # Associando o ID da conta selecionada
             planted_tree.save()
             return redirect("home")
+        else:
+            messages.error(request, "Something went wrong, please try again")
+            return redirect("add_planted_tree")
     else:
         form = PlantedTreeForm(user=request.user)
     return render(request, "add_planted_tree.html", {"form": form})
@@ -89,11 +91,9 @@ def my_planted_trees(request):
 def planted_tree_detail(request, pk):
     # making sure the user can only access his planted_trees by using user=request.user
     planted_tree = get_object_or_404(PlantedTree, pk=pk, user=request.user)
-    return render(request, 'planted_tree_detail.html', {'planted_tree': planted_tree})
+    return render(request, "planted_tree_detail.html", {"planted_tree": planted_tree})
 
 
 def my_accounts(request):
-    # Obtém todas as contas que o usuário faz parte
-    user_accounts = Account.objects.filter(members=request.user)    
-    # Renderiza o template com a lista de contas e árvores plantadas em cada uma delas
+    user_accounts = Account.objects.filter(members=request.user)
     return render(request, "my_accounts.html", {"user_accounts": user_accounts})

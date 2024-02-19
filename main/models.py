@@ -30,11 +30,9 @@ class User(AbstractUser):
     )
 
     def plant_tree(self, tree, location):
-        # Crie um objeto PlantedTree associado a este usuário
         PlantedTree.objects.create(user=self, tree=tree, location=location)
 
     def plant_trees(self, tree_locations):
-        # Crie vários objetos PlantedTree associados a este usuário
         for tree, location in tree_locations:
             PlantedTree.objects.create(user=self, tree=tree, location=location)
 

@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 class PlantedTreeListAPIView(generics.ListAPIView):
     serializer_class = PlantedTreeSerializer
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user

@@ -74,6 +74,13 @@
     </style>
 </head>
 <body>
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{message}}
+        </div>
+    {% endfor %}
+{% endif %}
     <a href="{% url 'user_logout' %}" class="logout-button">Logout</a> 
     
 <div class="home-container">
