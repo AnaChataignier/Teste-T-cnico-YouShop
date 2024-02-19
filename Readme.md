@@ -41,7 +41,7 @@ Abaixo colocarei imagens de cada tarefa e subtarefa funcionando para mais rápid
 
 :small_blue_diamond: Exibir todas as árvores plantadas nas contas de que o usuário faz parte
 
-![Descrição da imagem](imagens/youshopmytrees.png)
+![Descrição da imagem](imagens/youshopmyaccounts.png)
 
 :small_blue_diamond: Criar um método de api REST que retorne (em formato json) uma lista de todas as árvores plantadas pelo usuário logado atualmente.
 
