@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planted Tree Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+        .home-button,
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-button:hover,
+        .logout-button:hover {
+            background-color: #45a049;
+        }
+
+        .logout-button {
+            left: 120px; /* Ajuste para posicionar o botão Logout ao lado do botão Home */
+        }
+    </style>
+</head>
+<body>
+
+    <a href="{% url 'home' %}" class="home-button">Home</a>
+    <a href="{% url 'user_logout' %}" class="logout-button">Logout</a>
+<div class="container">
+    <h2>Planted Tree Detail</h2>
+    <p>Name: {{ planted_tree.tree.name }}</p>
+    <p>Scientific Name: {{ planted_tree.tree.scientific_name }}</p>
+    <p>Location: {{ planted_tree.location }}</p>
+    <p>Account: {{ planted_tree.account.name }}</p>
+    <p>Planted at: {{ planted_tree.planted_at }}</p>
+    <p>Age: {{ planted_tree.age }}</p>
+    
+    <!-- Adicione mais detalhes da árvore plantada conforme necessário -->
+</div>
+
+</body>
+</html>
